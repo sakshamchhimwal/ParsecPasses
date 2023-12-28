@@ -1,5 +1,5 @@
 import { uploadToCloudinary } from "../config/cloudinaryConfig.js";
-import { genrateQRCode } from "../utils/genrateQRCode.js"
+import { genrateQRCode } from "../utils/genrateQRCode.js";
 
 export const provideQRCodeLink = async (req, res, next) => {
     try {

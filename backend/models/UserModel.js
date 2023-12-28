@@ -7,6 +7,10 @@ const UserSchema = new Schema({
         required: true,
         unique: true
     },
+    role: {
+        type: Schema.Types.String,
+        default: "user"
+    },
     email: {
         type: Schema.Types.String,
         required: true,
@@ -40,6 +44,10 @@ const UserSchema = new Schema({
     qr_code_url: {
         type: Schema.Types.String,
         required: true
+    },
+    used: {
+        type: Schema.Types.Boolean,
+        default: "false"
     }
 })
 

@@ -1,6 +1,6 @@
+import { v2 as cloudinary } from 'cloudinary';
 import { config } from 'dotenv';
 config();
-import { v2 as cloudinary } from 'cloudinary';
 
 cloudinary.config({
     secure: true,
@@ -17,7 +17,6 @@ export const uploadToCloudinary = async (uuid) => {
         const res = await cloudinary.uploader.upload(`./public/images/qrcodes/${uuid}.png`, {
             use_filename: true
         });
-        // console.log(res);
         return res.secure_url;
     } catch (err) {
         console.log(err);

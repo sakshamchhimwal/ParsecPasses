@@ -1,15 +1,16 @@
-import { config } from 'dotenv';
-config();
 import axios from 'axios';
+import { config } from 'dotenv';
 import { Router } from 'express';
 import jwt from 'jsonwebtoken';
 import qs from 'qs';
-import { provideUUID } from '../middleware/addUUID.js';
-import UserModel from '../models/UserModel.js';
-import { UserSchemaValidationChain, userSchemaValidationMiddleware } from '../utils/schemaValidator.js';
 import { provideQRCodeLink } from '../middleware/addQRCode.js';
+import { provideUUID } from '../middleware/addUUID.js';
 import { checkEmailInUse } from '../middleware/checkEmailInUse.js';
+import { verifyJWT } from '../middleware/verifyJWT.js';
+import UserModel from '../models/UserModel.js';
 import { sendEmail } from '../services/mailService.js';
+import { UserSchemaValidationChain, userSchemaValidationMiddleware } from '../utils/schemaValidator.js';
+config();
 const router = Router();
 
 
@@ -32,8 +33,12 @@ router.get('/', async (req, res, next) => {
         },
       }
     )
-    console.log(result.data);
-    res.cookie("id_token", result.data.id_token)
+    const newToken = jwt.sign({
+      email: jwt.decode(result.data.id_token).email
+    }, process.env.JWT_SECRET, {
+      expiresIn: "1h"
+    });
+    res.cookie('id_token', newToken);
     res.redirect("/user");
   } else {
     const { id_token } = req.cookies;
@@ -47,7 +52,7 @@ router.get('/', async (req, res, next) => {
   }
 });
 
-router.get('/pass', async (req, res, next) => {
+router.get('/pass', verifyJWT, async (req, res, next) => {
   const userEmailAddress = jwt.decode(req.cookies.id_token).email;
   const user = await UserModel.findOne({ email: userEmailAddress });
   if (user) {
@@ -58,7 +63,7 @@ router.get('/pass', async (req, res, next) => {
 })
 
 
-router.post('/register', checkEmailInUse, UserSchemaValidationChain, userSchemaValidationMiddleware, provideUUID, provideQRCodeLink, async (req, res, next) => {
+router.post('/user', verifyJWT, checkEmailInUse, UserSchemaValidationChain, userSchemaValidationMiddleware, provideUUID, provideQRCodeLink, async (req, res, next) => {
   const user = await UserModel.findOne({ email: req.body.email });
   if (!user) {
     const data = req.body;

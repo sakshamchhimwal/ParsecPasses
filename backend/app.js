@@ -1,15 +1,16 @@
-import { config } from 'dotenv';
-config();
 import cookieParser from 'cookie-parser';
+import { config } from 'dotenv';
 import express, { json, static as static_, urlencoded } from 'express';
-import createError from 'http-errors';
 import logger from 'morgan';
 import { dirname, join } from 'path';
 import { fileURLToPath } from 'url';
-
 import { connectToMongoDB } from './config/connectToDB.js';
+import { verifyJWT } from './middleware/verifyJWT.js';
+import { verifyManager } from './middleware/verifyManager.js';
 import indexRouter from './routes/index.js';
+import managerRouter from './routes/manager.js';
 import userRouter from './routes/user.js';
+config();
 
 await connectToMongoDB(process.env.MONGODB_CONNECTION_URI);
 
@@ -26,16 +27,6 @@ app.use(urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(static_(join(__dirname, 'public')));
 
-
-
-app.use('/', indexRouter);
-app.use('/user', userRouter);
-
-// catch 404 and forward to error handler
-app.use(function (req, res, next) {
-  next(createError(404));
-});
-
 // error handler
 app.use(function (err, req, res, next) {
   // set locals, only providing error in development
@@ -46,4 +37,10 @@ app.use(function (err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+app.use('/', indexRouter);
+app.use('/user', userRouter);
+app.use('/manager', verifyJWT, verifyManager, managerRouter);
+
+
 export default app;
