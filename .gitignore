@@ -25,3 +25,7 @@ yarn-error.log*
 **/package-lock.json
 
 **/.env
+
+client_secret_1035864946381-4214pobp50sktci281pfdd8d8i4khsoo.apps.googleusercontent.com.json
+
+**/qrcodes

@@ -1,11 +1,15 @@
 import { config } from 'dotenv';
 config();
-import { Router } from 'express';
-import qs from 'qs';
 import axios from 'axios';
+import { Router } from 'express';
 import jwt from 'jsonwebtoken';
-import { UserSchemaValidationChain, userSchemaValidationMiddleware } from '../utils/schemaValidator.js';
+import qs from 'qs';
 import { provideUUID } from '../middleware/addUUID.js';
+import UserModel from '../models/UserModel.js';
+import { UserSchemaValidationChain, userSchemaValidationMiddleware } from '../utils/schemaValidator.js';
+import { provideQRCodeLink } from '../middleware/addQRCode.js';
+import { checkEmailInUse } from '../middleware/checkEmailInUse.js';
+import { sendEmail } from '../services/mailService.js';
 const router = Router();
 
 
@@ -34,14 +38,46 @@ router.get('/', async (req, res, next) => {
   } else {
     const { id_token } = req.cookies;
     const decodecJWT = jwt.decode(id_token);
-    res.render('form', { email: decodecJWT.email })
+    const existingUser = await (UserModel.findOne({ email: decodecJWT.email }));
+    if (!existingUser) {
+      return res.render('form', { email: decodecJWT.email })
+    } else {
+      return res.redirect('/user/pass');
+    }
   }
 });
 
+router.get('/pass', async (req, res, next) => {
+  const userEmailAddress = jwt.decode(req.cookies.id_token).email;
+  const user = await UserModel.findOne({ email: userEmailAddress });
+  if (user) {
+    return res.send(`<img src="${user.qr_code_url}" /><p>${user.uuid}</p>`);
+  } else {
+    return res.redirect('/');
+  }
+})
 
-router.post('/register', provideUUID, UserSchemaValidationChain, userSchemaValidationMiddleware, async (req, res, next) => {
-  console.log(req.body.uuid);
-  res.send("Success")
+
+router.post('/register', checkEmailInUse, UserSchemaValidationChain, userSchemaValidationMiddleware, provideUUID, provideQRCodeLink, async (req, res, next) => {
+  const user = await UserModel.findOne({ email: req.body.email });
+  if (!user) {
+    const data = req.body;
+    const newUser = await UserModel.create({
+      uuid: data.uuid,
+      email: data.email,
+      full_name: data.full_name,
+      college_name: data.college_name,
+      year: data.year,
+      branch: data.branch,
+      date_of_birth: data.date_of_birth,
+      mobile_number: data.mobile_number,
+      qr_code_url: data.qr_code_url
+    });
+    sendEmail(req.body.email, req.body.full_name, req.body.qr_code_url, req.body.uuid);
+    return res.redirect('/user/pass');
+  } else {
+    return res.redirect('/user/pass');
+  }
 })
 
 export default router;

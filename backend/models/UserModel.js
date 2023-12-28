@@ -4,11 +4,17 @@ import { Schema, model } from "mongoose";
 const UserSchema = new Schema({
     uuid: {
         type: Schema.Types.UUID,
-        required: true
+        required: true,
+        unique: true
     },
     email: {
         type: Schema.Types.String,
-        required: true
+        required: true,
+        unique: true
+    },
+    full_name: {
+        type: Schema.Types.String,
+        required: true,
     },
     college_name: {
         type: Schema.Types.String,
@@ -24,10 +30,15 @@ const UserSchema = new Schema({
     },
     mobile_number: {
         type: Schema.Types.String,
-        required: true
+        required: true,
+        unique: true
     },
     date_of_birth: {
         type: Schema.Types.Date,
+        required: true
+    },
+    qr_code_url: {
+        type: Schema.Types.String,
         required: true
     }
 })

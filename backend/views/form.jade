@@ -1,7 +1,12 @@
 center
   form(action="/user/register", method="POST")
     label Email
-      input(type="email", name="email", required, value=email)
+      input(type="email", name="email", required, value=email, disabled)
+      br
+      input(type="hidden", name="email", required, value=email)
+      br
+    label Full Name
+      input(type="text", name="full_name", required)
       br
     label College Name
       input(type="text", name="college_name", required)

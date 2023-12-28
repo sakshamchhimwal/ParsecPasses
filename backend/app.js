@@ -1,12 +1,17 @@
+import { config } from 'dotenv';
+config();
+import cookieParser from 'cookie-parser';
+import express, { json, static as static_, urlencoded } from 'express';
 import createError from 'http-errors';
-import express, { json, urlencoded, static as static_ } from 'express';
+import logger from 'morgan';
 import { dirname, join } from 'path';
 import { fileURLToPath } from 'url';
-import cookieParser from 'cookie-parser';
-import logger from 'morgan';
 
+import { connectToMongoDB } from './config/connectToDB.js';
 import indexRouter from './routes/index.js';
 import userRouter from './routes/user.js';
+
+await connectToMongoDB(process.env.MONGODB_CONNECTION_URI);
 
 const app = express();
 const __filename = fileURLToPath(import.meta.url);
@@ -20,6 +25,7 @@ app.use(json());
 app.use(urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(static_(join(__dirname, 'public')));
+
 
 
 app.use('/', indexRouter);
