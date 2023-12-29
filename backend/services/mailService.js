@@ -1,6 +1,6 @@
 import { config } from 'dotenv';
 import nodemailer from 'nodemailer';
-import { mailTemplate } from '../utils/mailTemplateGenrator';
+import { mailTemplate } from '../utils/mailTemplateGenrator.js';
 config();
 
 const transporter = nodemailer.createTransport({

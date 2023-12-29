@@ -1,38 +1,47 @@
-.App {
-  text-align: center;
+body{
+    background-color: black;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+p.animatedHeading {
+    background: rgb(90,46,232);
+    background: -moz-linear-gradient(73deg, rgba(90,46,232,1) 0%, rgba(255,255,0,1) 65%, rgba(255,52,204,1) 100%);
+    background: -webkit-linear-gradient(73deg, rgba(90,46,232,1) 0%, rgba(255,255,0,1) 65%, rgba(255,52,204,1) 100%);
+    background: linear-gradient(73deg, rgba(90,46,232,1) 0%, rgba(255,255,0,1) 65%, rgba(255,52,204,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#5a2ee8",endColorstr="#ff34cc",GradientType=1);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-fill-color: transparent;
+    background-size: 500% auto;
+    animation: textShine 5s ease-in-out infinite alternate;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+@keyframes textShine {
+    0% {
+        background-position: 0% 50%;
+    }
+    100% {
+        background-position: 100% 50%;
+    }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+a {
+    background: rgb(90,46,232);
+    background: -moz-linear-gradient(73deg, rgba(90,46,232,1) 0%, rgba(255,255,0,1) 65%, rgba(255,52,204,1) 100%);
+    background: -webkit-linear-gradient(73deg, rgba(90,46,232,1) 0%, rgba(255,255,0,1) 65%, rgba(255,52,204,1) 100%);
+    background: linear-gradient(73deg, rgba(90,46,232,1) 0%, rgba(255,255,0,1) 65%, rgba(255,52,204,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#5a2ee8",endColorstr="#ff34cc",GradientType=1);
+    /* -webkit-background-clip: text; */
+    /* background-clip: text; */
+    -webkit-text-fill-color: black;
+    /* text-fill-color: transparent; */
+    background-size: 500% auto;
+    animation: textShine 3s ease-in-out infinite alternate;
+    border-radius:8px;
+    -webkit-transition: 200ms;
+    transition: 200ms;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+a:hover {
+    border-radius: 20px;
 }

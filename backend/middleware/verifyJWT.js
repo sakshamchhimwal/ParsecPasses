@@ -1,12 +1,14 @@
 import { config } from 'dotenv';
 config();
 import jwt from 'jsonwebtoken';
+import createError from 'http-errors';
 export const verifyJWT = (req, res, next) => {
     try {
-        const token = req.cookies.id_token; // cookie
-        // const token = req.headers.Authorization.split(" ")[1];
+        // const token = req.cookies.id_token; // cookie
+        // console.log(req.headers);
+        const token = req.headers.authorization.split(" ")[1]; // header
         if (!token) {
-            return res.send({ error: "JWT Token not found" }).status(403);
+            return next(createError(403, 'JWT Token Not Found', { expose: false }))
         }
         const verify = jwt.verify(token, process.env.JWT_SECRET);
         if (verify) {
@@ -14,6 +16,7 @@ export const verifyJWT = (req, res, next) => {
             next();
         }
     } catch (err) {
-        return res.send({ error: "Invalid JWT Token" }).status(403);
+        console.log(err);
+        return next(createError(403, 'Invalid JWT Token', { expose: false }))
     }
 }

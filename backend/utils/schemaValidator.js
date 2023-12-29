@@ -7,7 +7,7 @@ const validateCollegeName = check('college_name').isString().trim().isLength({ m
 const validateYear = check('year').isInt({ allow_leading_zeroes: false }).withMessage('Invalid Year').exists().withMessage('Year is required');
 const validateBranch = check('branch').isString().trim().exists().withMessage('Branch is required');
 const validateMobileNumber = check('mobile_number').isMobilePhone('en-IN').withMessage('Invalid mobile number').exists().withMessage('Mobile number is required');
-const validateDateOfBirth = check('date_of_birth').isDate().withMessage('Invalid date of birth').exists().withMessage('Date of birth is required');
+const validateDateOfBirth = check('date_of_birth').isString().trim().isLength({ min: 10, max: 10 }).withMessage('Invalid date of birth').exists().withMessage('Date of birth is required');
 
 
 export const UserSchemaValidationChain = [validateName, validateEmail, validateCollegeName, validateYear, validateBranch, validateMobileNumber, validateDateOfBirth];

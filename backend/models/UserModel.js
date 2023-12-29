@@ -38,7 +38,7 @@ const UserSchema = new Schema({
         unique: true
     },
     date_of_birth: {
-        type: Schema.Types.Date,
+        type: Schema.Types.String,
         required: true
     },
     qr_code_url: {

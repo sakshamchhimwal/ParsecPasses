@@ -10,6 +10,7 @@ import { verifyManager } from './middleware/verifyManager.js';
 import indexRouter from './routes/index.js';
 import managerRouter from './routes/manager.js';
 import userRouter from './routes/user.js';
+import cors from 'cors';
 config();
 
 await connectToMongoDB(process.env.MONGODB_CONNECTION_URI);
@@ -26,6 +27,7 @@ app.use(json());
 app.use(urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(static_(join(__dirname, 'public')));
+app.use(cors());
 
 // error handler
 app.use(function (err, req, res, next) {
@@ -40,7 +42,7 @@ app.use(function (err, req, res, next) {
 
 app.use('/', indexRouter);
 app.use('/user', userRouter);
-app.use('/manager', verifyJWT, verifyManager, managerRouter);
+app.use('/manager', verifyManager, managerRouter);
 
 
 export default app;

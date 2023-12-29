@@ -1,3 +1,4 @@
+import createHttpError from "http-errors";
 import UserModel from "../models/UserModel.js";
 
 export const checkEmailInUse = async (req, res, next) => {
@@ -7,8 +8,9 @@ export const checkEmailInUse = async (req, res, next) => {
         if (!user) {
             return next();
         }
-        return res.redirect('/user/pass');
+        return res.send({ message: "User with this email already exists." }).status(409);
     } catch (err) {
         console.log(err);
+        return next(createHttpError(500));
     }
 }

@@ -1,24 +1,67 @@
-import logo from './logo.svg';
-import './App.css';
+import Container from '@mui/material/Container';
+import CssBaseline from "@mui/material/CssBaseline";
+import Typography from '@mui/material/Typography';
+import "./App.css";
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom";
+import { Home } from './components/user/Home';
+import { Pass } from './components/user/Pass';
+import { Scanner } from './components/manager/Scanner';
+import { Verify } from './components/manager/Verify';
+import { Form as ManagerForm } from "./components/manager/Form";
+import ErrorPage from './components/Error';
+import { ErrorBoundary } from "react-error-boundary";
+
 
 function App() {
+
+  const router = createBrowserRouter([
+    {
+      path: "*",
+      element: <ErrorPage />
+    },
+    {
+      path: "/",
+      element: < Home />
+    },
+    {
+      path: "/pass",
+      element: <Pass />
+    },
+    {
+      path: "/manager",
+      element: <Scanner />
+    },
+    {
+      path: "/genratePass",
+      element: <ManagerForm />
+    },
+    {
+      path: "/verify/:id",
+      element: <Verify />
+    }
+  ]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <CssBaseline>
+      <Container maxWidth="xl" style={{
+        background: "black",
+        minHeight: "100vh",
+        display: "flex",
+        flexDirection: "column",
+      }}>
+        <Typography variant="h3" component="p" color="textPrimary" textAlign="center" fontFamily="Rubik Mono One" style={{
+          wordSpacing: "-20px",
+          letterSpacing: "-3px",
+          marginBottom: "20px"
+        }} className='animatedHeading'>Get <br />Parsec Passes</Typography>
+        <ErrorBoundary fallback={<div>Something went wrong</div>}>
+          <RouterProvider router={router} />
+        </ErrorBoundary>
+      </Container>
+    </CssBaseline>
   );
 }
 
