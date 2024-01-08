@@ -6,6 +6,11 @@ import jwt from 'jsonwebtoken';
 import qs from 'qs';
 import { verifyJWT } from '../middleware/verifyJWT.js';
 import UserModel from '../models/UserModel.js';
+import { UserSchemaValidationChain, userSchemaValidationMiddleware } from '../utils/schemaValidator.js';
+import { checkEmailInUse } from "../middleware/checkEmailInUse.js";
+import { provideQRCodeLink } from "../middleware/addQRCode.js";
+import { provideUUID } from "../middleware/addUUID.js";
+import {sendEmail} from "../services/mailService.js"
 config();
 const router = Router();
 
@@ -58,5 +63,32 @@ router.get('/pass', verifyJWT, async (req, res, next) => {
   }
 })
 
+router.post('/register', verifyJWT, checkEmailInUse, UserSchemaValidationChain, userSchemaValidationMiddleware, provideUUID, provideQRCodeLink, async (req, res, next) => {
+  try {
+    const user = await UserModel.findOne({ email: req.body.email });
+    if (!user) {
+      const data = req.body;
+      // console.log(data);
+      const newUser = await UserModel.create({
+        uuid: data.uuid,
+        email: data.email,
+        full_name: data.full_name,
+        college_name: data.college_name,
+        year: data.year,
+        branch: data.branch,
+        date_of_birth: data.date_of_birth,
+        mobile_number: data.mobile_number,
+        qr_code_url: data.qr_code_url
+      });
+      sendEmail(req.body.email, req.body.full_name, req.body.qr_code_url, req.body.image, req.body.uuid);
+      return res.send({ message: "User registered successfully" }).status(200);
+    } else {
+      return res.send({ message: "User with this email already exists." }).status(409);
+    }
+  } catch (err) {
+    console.log(err);
+    return next(createHttpError(503, "Internal Server Error"));
+  }
+})
 
 export default router;

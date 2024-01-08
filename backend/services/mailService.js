@@ -6,19 +6,19 @@ config();
 const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-        user: 'saksham19684718@gmail.com',
+        user: 'support.parsec@iitdh.ac.in',
         pass: process.env.APP_PASS
     }
 });
 
 
 
-export const sendEmail = (emailAddress, name, imageLink, uuid) => {
+export const sendEmail = (emailAddress, name, imageLink, renderImage, uuid) => {
     const mailOptions = {
-        from: 'saksham19684718@gmail.com',
+        from: 'support.parsec@iitdh.ac.in',
         to: emailAddress,
         subject: 'Parsec Passes',
-        html: mailTemplate(emailAddress, name, imageLink, uuid)
+        html: mailTemplate(emailAddress, name, imageLink, renderImage, uuid)
     };
     transporter.sendMail(mailOptions, function (error, info) {
         if (error) {

@@ -136,7 +136,7 @@ export function Form() {
                                 helperText={user.full_name.length < 4 ? "Required" : ""}
                             />
                         </FormControl>
-                        <FormControl
+                        {/* <FormControl
                             sx={{
                                 marginBottom: "3px",
                             }}
@@ -264,7 +264,7 @@ export function Form() {
                                 fullWidth
                                 margin="normal"
                             />
-                        </FormControl>
+                        </FormControl> */}
                         <Button
                             type="submit"
                             variant="outlined"

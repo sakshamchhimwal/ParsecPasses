@@ -6,7 +6,7 @@ import { UserSchemaValidationChain, userSchemaValidationMiddleware } from '../ut
 import { checkEmailInUse } from "../middleware/checkEmailInUse.js";
 import { provideQRCodeLink } from "../middleware/addQRCode.js";
 import { provideUUID } from "../middleware/addUUID.js";
-import {sendEmail} from "../services/mailService.js"
+import { sendEmail } from "../services/mailService.js"
 config();
 
 
@@ -40,19 +40,18 @@ router.post('/register', checkEmailInUse, UserSchemaValidationChain, userSchemaV
         const user = await UserModel.findOne({ email: req.body.email });
         if (!user) {
             const data = req.body;
-            // console.log(data);
             const newUser = await UserModel.create({
                 uuid: data.uuid,
                 email: data.email,
                 full_name: data.full_name,
-                college_name: data.college_name,
-                year: data.year,
-                branch: data.branch,
-                date_of_birth: data.date_of_birth,
-                mobile_number: data.mobile_number,
+                college_name: "IIT Dharwad",
+                // year: data.year,
+                // branch: data.branch,
+                // date_of_birth: data.date_of_birth,
+                // mobile_number: data.mobile_number,
                 qr_code_url: data.qr_code_url
             });
-            sendEmail(req.body.email, req.body.full_name, req.body.qr_code_url, req.body.uuid);
+            sendEmail(req.body.email, req.body.full_name, req.body.qr_code_url, req.body.image, req.body.uuid);
             return res.send({ message: "User registered successfully" }).status(200);
         } else {
             return res.send({ message: "User with this email already exists." }).status(409);

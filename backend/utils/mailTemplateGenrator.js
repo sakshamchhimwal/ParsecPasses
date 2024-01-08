@@ -1,4 +1,5 @@
-export const mailTemplate = (emailAddress, name, imageLink, uuid) => {
+export const mailTemplate = (emailAddress, name, imageLink, renderImage, uuid) => {
+    console.log({ emailAddress, name, imageLink, renderImage, uuid });
     return `
     <!DOCTYPE html>
     <html>
@@ -22,9 +23,10 @@ export const mailTemplate = (emailAddress, name, imageLink, uuid) => {
         margin-bottom: 20px;
     }
     img {
-        width: 200px;
-        height: 200px;
-        object-fit: cover; /* Ensures QR code fits within image dimensions */
+        width: 100vw;
+        height: auto;
+        object-fit: fill; /* Ensures QR code fits within image dimensions */
+        max-width: 500px;
     }
     </style>
     </head>
@@ -37,7 +39,10 @@ export const mailTemplate = (emailAddress, name, imageLink, uuid) => {
         <p>${uuid}</p>
         <h2>QR Code:</h2>
         <p><a href="${imageLink}">View QR Code</a></p>
-        <img src="${imageLink}" alt="Pass QR Code">
+        <center>
+        ${renderImage}
+        <img src="https://res.cloudinary.com/dozbdw6sd/image/upload/v1704573082/cdf6me8ksozpxc8lwavr.png" />
+        </center>
     </div>
     <p>Please keep this information safe and present your QR code when needed.</p>
     <p>Thank you!</p>

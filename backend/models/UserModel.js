@@ -22,24 +22,23 @@ const UserSchema = new Schema({
     },
     college_name: {
         type: Schema.Types.String,
-        required: true
+        // required: true
     },
     year: {
         type: Schema.Types.String,
-        required: true
+        // required: true
     },
     branch: {
         type: Schema.Types.String,
-        required: true
+        // required: true
     },
     mobile_number: {
         type: Schema.Types.String,
-        required: true,
-        unique: true
+        // required: true,
     },
     date_of_birth: {
         type: Schema.Types.String,
-        required: true
+        // required: true
     },
     qr_code_url: {
         type: Schema.Types.String,
