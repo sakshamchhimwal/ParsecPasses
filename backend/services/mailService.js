@@ -17,8 +17,9 @@ export const sendEmail = (emailAddress, name, imageLink, renderImage, uuid) => {
     const mailOptions = {
         from: 'support.parsec@iitdh.ac.in',
         to: emailAddress,
-        subject: 'Parsec Passes',
+        subject: 'Parsec Pass',
         html: mailTemplate(emailAddress, name, imageLink, renderImage, uuid)
+        // html: mailTemplate(emailAddress, name, imageLink, uuid)
     };
     transporter.sendMail(mailOptions, function (error, info) {
         if (error) {

@@ -1,8 +1,26 @@
-Timestamp,Name,Seat,Payment_Screenshot,QR_Code,Email_Address
-1/7/2024 11:11:02,Dhanush H N,Back Half (INR 250),https://drive.google.com/open?id=1kd1lv-nWPGAuR7rXiiByDNnSBOHXcoYb,UPI Ref. No- 400713724394,cs23bt010@iitdh.ac.in
-1/7/2024 11:50:20,Ramank Sharma ,Back Half (INR 250),https://drive.google.com/open?id=1Gfc_rEz2yqd3nhRsf7kGB1QRGS3OVr9Q,,220150011@iitdh.ac.in
-1/7/2024 20:14:17,T Namratha,Back Half (INR 250),https://drive.google.com/open?id=1DwXWCi7bB6w6kL3es2ElO8EHMGWWYKEK,,ep23bt003@iitdh.ac.in
-1/7/2024 21:38:37,Dhwani Shah ,Back Half (INR 250),https://drive.google.com/open?id=13JGgI3DCmzFHYsnBso5Qg7AfzPcFMSWI,,222051001@iitdh.ac.in
-1/7/2024 21:50:23,Himani sharma ,Back Half (INR 250),https://drive.google.com/open?id=17lgat7sfQc81zWyvFMKgGWBQIQ12KPfm,,222081003@iitdh.ac.in
-1/8/2024 0:16:02,Rojalin Padhi ,Back Half (INR 250),https://drive.google.com/open?id=1vQ7LXyZTuzyjGFlkBpRzdgFExdVM4GJm,,222081005@iitdh.ac.in
-1/8/2024 15:02:19,SAPTARSHI DEY,Back Half (INR 250),https://drive.google.com/open?id=141aQFBECvm0IdJzuf5TRmY-kPK4Dh7Ux,,222081004@iitdh.ac.in
+Timestamp,Name,Seat,Payment Screenshot ,QR Code,Email Address,
+1/9/2024 12:15:04,PREKSHA PATANGE,Back Half (INR 250),https://drive.google.com/open?id=1-N7dWUn4QflyspD8eaLaox587-LZH5hP,,mc23bt029@iitdh.ac.in,
+1/9/2024 12:17:34,Tiyasa Das,Back Half (INR 250),https://drive.google.com/open?id=18dbjyt08OfC8LxEVGl7Hi2A-KQhn-hBt,Done,me23bt014@iitdh.ac.in,
+1/9/2024 14:06:37,Neelpramatha K K,Back Half (INR 250),https://drive.google.com/open?id=1yK4WNPliSIRIi_VBMFhqyO2KiZD1hD9m,,cs23bt048@iitdh.ac.in,
+1/9/2024 14:09:18,Srihari Gonahal ,Back Half (INR 250),https://drive.google.com/open?id=1UHo-wEH2yjwRrwNURtbqRauWYthOli1j,,ee23bt030@iitdh.ac.in,
+1/9/2024 19:27:47,Mukta Vedpathak,Back Half (INR 250),https://drive.google.com/open?id=1ViZtJshJzMovSsAENI3cvCcPJVuTNJ1O,,220110014@iitdh.ac.in,
+1/9/2024 19:33:58,Omkar Kulkarni ,Back Half (INR 250),https://drive.google.com/open?id=11JaqhJHOtiy2YkpkHLiJr7xZAfboK7TL,,220030032@iitdh.ac.in,
+1/9/2024 20:01:30,Bidipta Saha ,Back Half (INR 250),https://drive.google.com/open?id=1ZbSrHoRU-LgTIIOm_LxrXYQF0xoFw1jv,,220150002@iitdh.ac.in,
+1/9/2024 20:06:49,Sai Sreeharsha Bolloju,Back Half (INR 250),https://drive.google.com/open?id=1vm4FFVomuTw45BziYtfibTzJWsZjXe5c,,cs23bt058@iitdh.ac.in,
+1/9/2024 21:13:51,NAKKA SHEETAL RAO,Back Half (INR 250),https://drive.google.com/open?id=1gXRzSVw-XX0nAJUclnJP4zcXs7jpky3l,,ee23bt051@iitdh.ac.in,
+1/9/2024 21:44:47,Maitreyee Kumbhojkar ,Back Half (INR 250),https://drive.google.com/open?id=13VcdTwzp6VFrOt4pKyPIoVf9vHHWnTK9,,ee23bt017@iitdh.ac.in,
+1/9/2024 21:53:29,Haswika ,Back Half (INR 250),https://drive.google.com/open?id=1IqgHI4veFTeZp9myzdszmQfhbB78JUWy,,ee23bt020@iitdh.ac.in,
+1/9/2024 22:02:39,Sri Smaran ,Back Half (INR 250),https://drive.google.com/open?id=1h3QjnNbGq2nSJFmLRCXpGTSga-P_MOKz,Payment done ,cs23bt039@iitdh.ac.in,
+1/9/2024 22:22:58,Aabha Devnikar,Back Half (INR 250),https://drive.google.com/open?id=1qcRgY2eu-9JDmnKKozN0hS2sHFnQeXmD,,ch23bt002@iitdh.ac.in,
+1/9/2024 22:30:14,Shreya S Bhat,Back Half (INR 250),https://drive.google.com/open?id=1fOB6umQrjJkgEVl3hHB-ESh20Ms_Vu1Y,,mc23bt013@iitdh.ac.in,
+1/9/2024 22:30:19,Pallavi,Back Half (INR 250),https://drive.google.com/open?id=1zPHn7imrZtLKM2-9IqqT2p5VL1BsffoW,,me23bt034@iitdh.ac.in,
+1/9/2024 23:04:36,Yashaswini L,Back Half (INR 250),https://drive.google.com/open?id=1fO_K6SwZgmK8-stpshtMG2njSwlCU_JW,,cs23bt060@iitdh.ac.in,
+1/9/2024 23:37:06,Harsh Oganja,Back Half (INR 250),https://drive.google.com/open?id=1sThbfP06ZPu_GgBBdPtR4ED0SiO9xkxM,Harsh Oganja,220010037@iitdh.ac.in,
+1/9/2024 23:38:20,Prabhav patel,Back Half (INR 250),https://drive.google.com/open?id=1O8uE6WEAGpWDN0alqHYFWrTowHq2Wz1F,,220120013@iitdh.ac.in,
+1/9/2024 23:39:18,Yash Gholkar,Back Half (INR 250),https://drive.google.com/open?id=1dqGlXFdKJnDKM5MK4mn-Q1xpyRUx6-Mm,,220010063@iitdh.ac.in,
+1/9/2024 23:40:29,Vedansh Chaudhary,Back Half (INR 250),https://drive.google.com/open?id=1Vlad2XI5EwGhdfgK83DcWbGNDGuYSxss,,225100040@iitdh.ac.in,
+1/9/2024 23:44:20,Anupam Rabha,Back Half (INR 250),https://drive.google.com/open?id=1dy3oflHkd2chFoEoXKwmQ4HTJo3-lwod,,220020007@iitdh.ac.in,
+1/9/2024 23:57:45,Om Nilesh Nakrani,Back Half (INR 250),https://drive.google.com/open?id=1ZkjIldn7wwXtaYdhD18vxwIet2cqJ8PP,,220010038@iitdh.ac.in,
+1/9/2024 23:59:26,Krunal Patel,Back Half (INR 250),https://drive.google.com/open?id=1AJz1g6ZUUY5l55PjR9ek5iu82bCnMbSq,,225100022@iitdh.ac.in,
+1/10/2024 0:00:07,Harshit verma,Back Half (INR 250),https://drive.google.com/open?id=1X3JmprKV4S3rQx53R4pVwaqaCXRqEyTz,,225100013@iitdh.ac.in,
+1/10/2024 2:06:07,Aditi Khedkar ,Back Half (INR 250),https://drive.google.com/open?id=1d6HFz7ZtUHM-wgxcLIjZln_7iYbk9AoS,,220020002@iitdh.ac.in,

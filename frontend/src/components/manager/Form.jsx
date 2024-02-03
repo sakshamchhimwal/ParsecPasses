@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
 import {
-    TextField,
-    Button,
-    FormControl,
-    FormLabel,
-    FormHelperText,
-    RadioGroup,
-    FormControlLabel,
-    Radio,
-    Container,
-    Typography,
+	TextField,
+	Button,
+	FormControl,
+	FormLabel,
+	FormHelperText,
+	RadioGroup,
+	FormControlLabel,
+	Radio,
+	Container,
+	Typography,
 } from "@mui/material";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
@@ -20,123 +20,131 @@ import { useNavigate } from "react-router-dom";
 import { registerUser } from "../../api/manager";
 
 const darkTheme = createTheme({
-    palette: {
-        mode: "dark",
-    },
+	palette: {
+		mode: "dark",
+	},
 });
 
 export function Form() {
-    const navigate = useNavigate();
-    const [user, setUser] = useState({
-        email: "",
-        full_name: "",
-        college_name: "",
-        year: "",
-        branch: "",
-        mobile_number: "",
-        date_of_birth: null,
-    });
-    const [isSubmitting, setIsSubmitting] = useState(false);
-    useEffect(() => {
-        // Get cookies
-        const cookies = document.cookie.split(";");
-        const idTokenCookie = cookies.find((cookie) => cookie.startsWith("id_token="));
+	const navigate = useNavigate();
+	const [user, setUser] = useState({
+		email: "",
+		full_name: "",
+		college_name: "",
+		year: "",
+		branch: "",
+		mobile_number: "",
+		date_of_birth: null,
+	});
+	const [isSubmitting, setIsSubmitting] = useState(false);
+	useEffect(() => {
+		// Get cookies
+		const cookies = document.cookie.split(";");
+		const idTokenCookie = cookies.find((cookie) =>
+			cookie.startsWith("id_token=")
+		);
 
-        if (idTokenCookie) {
-            const idToken = idTokenCookie.split("=")[1];
+		if (idTokenCookie) {
+			const idToken = idTokenCookie.split("=")[1];
 
-            // Set id_token to localStorage
-            localStorage.setItem("id_token", idToken);
-        }
-    }, []);
+			// Set id_token to localStorage
+			localStorage.setItem("id_token", idToken);
+		}
+	}, []);
 
-    const handleChange = (event) => {
-        setUser({ ...user, [event.target.name]: event.target.value });
-    };
+	const handleChange = (event) => {
+		setUser({ ...user, [event.target.name]: event.target.value });
+	};
 
-    // Handle form submission (replace with your actual submission logic)
-    const handleSubmit = async (event) => {
-        try {
-            setIsSubmitting(true);
-            event.preventDefault();
-            console.log(user); // Do something with the form data
-            const res = await registerUser(user);
-            setIsSubmitting(false);
-            setUser({
-                email: "",
-                full_name: "",
-                college_name: "",
-                year: "",
-                branch: "",
-                mobile_number: "",
-                date_of_birth: null,
-            });
-        } catch (err) {
-            console.log(err);
-        }
-    };
+	// Handle form submission (replace with your actual submission logic)
+	const handleSubmit = async (event) => {
+		try {
+			setIsSubmitting(true);
+			event.preventDefault();
+			console.log(user); // Do something with the form data
+			const res = await registerUser(user);
+			setIsSubmitting(false);
+			setUser({
+				email: "",
+				full_name: "",
+				college_name: "",
+				year: "",
+				branch: "",
+				mobile_number: "",
+				date_of_birth: null,
+			});
+		} catch (err) {
+			console.log(err);
+		}
+	};
 
-    return (
-        <ThemeProvider theme={darkTheme}>
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <Container
-                    maxWidth="sm"
-                    sx={{
-                        padding: "5px 0px",
-                    }}
-                >
-                    <form
-                        onSubmit={handleSubmit}
-                        style={{
-                            display: "flex",
-                            flexDirection: "column",
-                        }}
-                    >
-                        <FormControl
-                            sx={{
-                                marginBottom: "3px",
-                            }}
-                        >
-                            <FormLabel
-                                sx={{
-                                    marginBottom: "-10px",
-                                }}
-                            >
-                                Email
-                            </FormLabel>
-                            <TextField
-                                name="email"
-                                value={user.email}
-                                onChange={handleChange}
-                                required
-                                fullWidth
-                                margin="normal"
-                                helperText={!user.full_name.includes("@") ? "Required" : ""}
-                            />
-                        </FormControl>
-                        <FormControl
-                            sx={{
-                                marginBottom: "3px",
-                            }}
-                        >
-                            <FormLabel
-                                sx={{
-                                    marginBottom: "-10px",
-                                }}
-                            >
-                                Full Name
-                            </FormLabel>
-                            <TextField
-                                name="full_name"
-                                value={user.full_name}
-                                onChange={handleChange}
-                                required
-                                fullWidth
-                                margin="normal"
-                                helperText={user.full_name.length < 4 ? "Required" : ""}
-                            />
-                        </FormControl>
-                        {/* <FormControl
+	return (
+		<ThemeProvider theme={darkTheme}>
+			<LocalizationProvider dateAdapter={AdapterDayjs}>
+				<Container
+					maxWidth="sm"
+					sx={{
+						padding: "5px 0px",
+					}}
+				>
+					<form
+						onSubmit={handleSubmit}
+						style={{
+							display: "flex",
+							flexDirection: "column",
+						}}
+					>
+						<FormControl
+							sx={{
+								marginBottom: "3px",
+							}}
+						>
+							<FormLabel
+								sx={{
+									marginBottom: "-10px",
+								}}
+							>
+								Email
+							</FormLabel>
+							<TextField
+								name="email"
+								value={user.email}
+								onChange={handleChange}
+								required
+								fullWidth
+								margin="normal"
+								helperText={
+									!user.full_name.includes("@")
+										? "Required"
+										: ""
+								}
+							/>
+						</FormControl>
+						<FormControl
+							sx={{
+								marginBottom: "3px",
+							}}
+						>
+							<FormLabel
+								sx={{
+									marginBottom: "-10px",
+								}}
+							>
+								Full Name
+							</FormLabel>
+							<TextField
+								name="full_name"
+								value={user.full_name}
+								onChange={handleChange}
+								required
+								fullWidth
+								margin="normal"
+								helperText={
+									user.full_name.length < 4 ? "Required" : ""
+								}
+							/>
+						</FormControl>
+						<FormControl
                             sx={{
                                 marginBottom: "3px",
                             }}
@@ -160,9 +168,9 @@ export function Form() {
                                         ? "College name must be at least 4 characters long"
                                         : ""
                                 }
-                            />
-                        </FormControl>
-                        <FormControl
+                            /> 
+                            </FormControl>
+						{/* <FormControl
                             sx={{
                                 display: "flex",
                                 flexDirection: "column",
@@ -196,8 +204,8 @@ export function Form() {
                             ) : (
                                 ""
                             )}
-                        </FormControl>
-                        <FormControl
+                        </FormControl> */}
+						{/* <FormControl
                             sx={{
                                 marginBottom: "3px",
                             }}
@@ -222,34 +230,35 @@ export function Form() {
                                         : ""
                                 }
                             />
-                        </FormControl>
-                        <FormControl
-                            sx={{
-                                marginBottom: "3px",
-                            }}
-                        >
-                            <FormLabel
-                                sx={{
-                                    marginBottom: "-10px",
-                                }}
-                            >
-                                Mobile Number
-                            </FormLabel>
-                            <TextField
-                                name="mobile_number"
-                                value={user.mobile_number}
-                                onChange={handleChange}
-                                required
-                                fullWidth
-                                margin="normal"
-                                helperText={
-                                    !user.mobile_number || !/^[0-9]{10}$/.test(user.mobile_number)
-                                        ? "Please enter a valid 10-digit mobile number"
-                                        : ""
-                                }
-                            />
-                        </FormControl>
-                        <FormControl>
+                        </FormControl> */}
+						<FormControl
+							sx={{
+								marginBottom: "3px",
+							}}
+						>
+							<FormLabel
+								sx={{
+									marginBottom: "-10px",
+								}}
+							>
+								Mobile Number
+							</FormLabel>
+							<TextField
+								name="mobile_number"
+								value={user.mobile_number}
+								onChange={handleChange}
+								required
+								fullWidth
+								margin="normal"
+								helperText={
+									!user.mobile_number ||
+									!/^[0-9]{10}$/.test(user.mobile_number)
+										? "Please enter a valid 10-digit mobile number"
+										: ""
+								}
+							/>
+						</FormControl>
+						{/* <FormControl>
                             <FormLabel>Date of Birth</FormLabel>
                             <DatePicker
                                 name="date_of_birth"
@@ -265,33 +274,33 @@ export function Form() {
                                 margin="normal"
                             />
                         </FormControl> */}
-                        <Button
-                            type="submit"
-                            variant="outlined"
-                            color="primary"
-                            sx={{
-                                maxWidth: "100px",
-                                margin: "auto",
-                                marginTop: "20px",
-                            }}
-                        >
-                            <Typography
-                                variant="body"
-                                component="p"
-                                color="textPrimary"
-                                textAlign="center"
-                                fontFamily="Rubik Mono One"
-                                style={{
-                                    textDecoration: "none",
-                                }}
-                                className="animatedHeading"
-                            >
-                                Submit
-                            </Typography>
-                        </Button>
-                    </form>
-                </Container>
-            </LocalizationProvider>
-        </ThemeProvider>
-    );
+						<Button
+							type="submit"
+							variant="outlined"
+							color="primary"
+							sx={{
+								maxWidth: "100px",
+								margin: "auto",
+								marginTop: "20px",
+							}}
+						>
+							<Typography
+								variant="body"
+								component="p"
+								color="textPrimary"
+								textAlign="center"
+								fontFamily="Rubik Mono One"
+								style={{
+									textDecoration: "none",
+								}}
+								className="animatedHeading"
+							>
+								Submit
+							</Typography>
+						</Button>
+					</form>
+				</Container>
+			</LocalizationProvider>
+		</ThemeProvider>
+	);
 }

@@ -1,21 +1,22 @@
 import { config } from "dotenv";
 import { Router } from "express";
 import createHttpError from "http-errors";
-import UserModel from "../models/UserModel.js";
+// import UserModel from "../models/UserModel.js";
+
 import { UserSchemaValidationChain, userSchemaValidationMiddleware } from '../utils/schemaValidator.js';
 import { checkEmailInUse } from "../middleware/checkEmailInUse.js";
 import { provideQRCodeLink } from "../middleware/addQRCode.js";
 import { provideUUID } from "../middleware/addUUID.js";
 import { sendEmail } from "../services/mailService.js"
+import DjNiteModel from "../models/DJNiteModel.js";
 config();
-
 
 
 const router = Router();
 
 router.get('/verify/:id', async (req, res, next) => {
     const uuid = req.params.id;
-    const findUser = await UserModel.findOne({ uuid: uuid, used: false });
+    const findUser = await DjNiteModel.findOne({ uuid: uuid, used: false });
     if (findUser) {
         return res.send({ findUser }).status(200);
     }
@@ -26,7 +27,7 @@ router.get('/verify/:id', async (req, res, next) => {
 
 router.post('/verify/:id', async (req, res, next) => {
     const uuid = req.params.id;
-    const findUser = await UserModel.findOne({ uuid: uuid });
+    const findUser = await DjNiteModel.findOne({ uuid: uuid });
     if (findUser) {
         findUser.used = true;
         await findUser.save();
@@ -37,18 +38,18 @@ router.post('/verify/:id', async (req, res, next) => {
 
 router.post('/register', checkEmailInUse, UserSchemaValidationChain, userSchemaValidationMiddleware, provideUUID, provideQRCodeLink, async (req, res, next) => {
     try {
-        const user = await UserModel.findOne({ email: req.body.email });
+        const user = await DjNiteModel.findOne({ email: req.body.email });
         if (!user) {
             const data = req.body;
-            const newUser = await UserModel.create({
+            const newUser = await DjNiteModel.create({
                 uuid: data.uuid,
                 email: data.email,
                 full_name: data.full_name,
-                college_name: "IIT Dharwad",
+                college_name: data.college_name,
                 // year: data.year,
                 // branch: data.branch,
                 // date_of_birth: data.date_of_birth,
-                // mobile_number: data.mobile_number,
+                mobile_number: data.mobile_number,
                 qr_code_url: data.qr_code_url
             });
             sendEmail(req.body.email, req.body.full_name, req.body.qr_code_url, req.body.image, req.body.uuid);

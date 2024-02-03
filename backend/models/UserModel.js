@@ -24,21 +24,9 @@ const UserSchema = new Schema({
         type: Schema.Types.String,
         // required: true
     },
-    year: {
-        type: Schema.Types.String,
-        // required: true
-    },
-    branch: {
-        type: Schema.Types.String,
-        // required: true
-    },
     mobile_number: {
         type: Schema.Types.String,
         // required: true,
-    },
-    date_of_birth: {
-        type: Schema.Types.String,
-        // required: true
     },
     qr_code_url: {
         type: Schema.Types.String,
